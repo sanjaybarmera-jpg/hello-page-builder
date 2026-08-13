@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
-import { Route as AdminMetalRatesRouteImport } from './routes/admin.metal-rates'
-import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminShellIndexRouteImport } from './routes/admin._shell.index'
+import { Route as AdminShellInventoryRouteImport } from './routes/admin._shell.inventory'
+import { Route as AdminShellMetalRatesRouteImport } from './routes/admin._shell.metal-rates'
+import { Route as AdminShellOrdersRouteImport } from './routes/admin._shell.orders'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,23 +26,23 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
+const AdminShellIndexRoute = AdminShellIndexRouteImport.update({
+  id: '/_shell/',
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminInventoryRoute = AdminInventoryRouteImport.update({
-  id: '/inventory',
+const AdminShellInventoryRoute = AdminShellInventoryRouteImport.update({
+  id: '/_shell/inventory',
   path: '/inventory',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminMetalRatesRoute = AdminMetalRatesRouteImport.update({
-  id: '/metal-rates',
+const AdminShellMetalRatesRoute = AdminShellMetalRatesRouteImport.update({
+  id: '/_shell/metal-rates',
   path: '/metal-rates',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminOrdersRoute = AdminOrdersRouteImport.update({
-  id: '/orders',
+const AdminShellOrdersRoute = AdminShellOrdersRouteImport.update({
+  id: '/_shell/orders',
   path: '/orders',
   getParentRoute: () => AdminRoute,
 } as any)
@@ -50,26 +50,26 @@ const AdminOrdersRoute = AdminOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/admin/inventory': typeof AdminInventoryRoute
-  '/admin/metal-rates': typeof AdminMetalRatesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/inventory': typeof AdminShellInventoryRoute
+  '/admin/metal-rates': typeof AdminShellMetalRatesRoute
+  '/admin/orders': typeof AdminShellOrdersRoute
+  '/admin/': typeof AdminShellIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin/inventory': typeof AdminInventoryRoute
-  '/admin/metal-rates': typeof AdminMetalRatesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin': typeof AdminIndexRoute
+  '/admin/inventory': typeof AdminShellInventoryRoute
+  '/admin/metal-rates': typeof AdminShellMetalRatesRoute
+  '/admin/orders': typeof AdminShellOrdersRoute
+  '/admin': typeof AdminShellIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/admin/inventory': typeof AdminInventoryRoute
-  '/admin/metal-rates': typeof AdminMetalRatesRoute
-  '/admin/orders': typeof AdminOrdersRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/_shell/inventory': typeof AdminShellInventoryRoute
+  '/admin/_shell/metal-rates': typeof AdminShellMetalRatesRoute
+  '/admin/_shell/orders': typeof AdminShellOrdersRoute
+  '/admin/_shell/': typeof AdminShellIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,10 +87,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
-    | '/admin/inventory'
-    | '/admin/metal-rates'
-    | '/admin/orders'
-    | '/admin/'
+    | '/admin/_shell/inventory'
+    | '/admin/_shell/metal-rates'
+    | '/admin/_shell/orders'
+    | '/admin/_shell/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -114,49 +114,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
+    '/admin/_shell/': {
+      id: '/admin/_shell/'
       path: '/'
       fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
+      preLoaderRoute: typeof AdminShellIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/inventory': {
-      id: '/admin/inventory'
+    '/admin/_shell/inventory': {
+      id: '/admin/_shell/inventory'
       path: '/inventory'
       fullPath: '/admin/inventory'
-      preLoaderRoute: typeof AdminInventoryRouteImport
+      preLoaderRoute: typeof AdminShellInventoryRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/metal-rates': {
-      id: '/admin/metal-rates'
+    '/admin/_shell/metal-rates': {
+      id: '/admin/_shell/metal-rates'
       path: '/metal-rates'
       fullPath: '/admin/metal-rates'
-      preLoaderRoute: typeof AdminMetalRatesRouteImport
+      preLoaderRoute: typeof AdminShellMetalRatesRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/orders': {
-      id: '/admin/orders'
+    '/admin/_shell/orders': {
+      id: '/admin/_shell/orders'
       path: '/orders'
       fullPath: '/admin/orders'
-      preLoaderRoute: typeof AdminOrdersRouteImport
+      preLoaderRoute: typeof AdminShellOrdersRouteImport
       parentRoute: typeof AdminRoute
     }
   }
 }
 
 interface AdminRouteChildren {
-  AdminInventoryRoute: typeof AdminInventoryRoute
-  AdminMetalRatesRoute: typeof AdminMetalRatesRoute
-  AdminOrdersRoute: typeof AdminOrdersRoute
-  AdminIndexRoute: typeof AdminIndexRoute
+  AdminShellInventoryRoute: typeof AdminShellInventoryRoute
+  AdminShellMetalRatesRoute: typeof AdminShellMetalRatesRoute
+  AdminShellOrdersRoute: typeof AdminShellOrdersRoute
+  AdminShellIndexRoute: typeof AdminShellIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminInventoryRoute: AdminInventoryRoute,
-  AdminMetalRatesRoute: AdminMetalRatesRoute,
-  AdminOrdersRoute: AdminOrdersRoute,
-  AdminIndexRoute: AdminIndexRoute,
+  AdminShellInventoryRoute: AdminShellInventoryRoute,
+  AdminShellMetalRatesRoute: AdminShellMetalRatesRoute,
+  AdminShellOrdersRoute: AdminShellOrdersRoute,
+  AdminShellIndexRoute: AdminShellIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
