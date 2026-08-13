@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMetalRates } from "@/hooks/useJewelleryData";
 import { inr } from "@/lib/jewellery";
 
-export const Route = createFileRoute("/admin/metal-rates")({
+export const Route = createFileRoute("/admin/_shell/metal-rates")({
   component: MetalRatesPage,
 });
 
