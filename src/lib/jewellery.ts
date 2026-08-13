@@ -19,6 +19,8 @@ export type Product = {
   sku: string;
   metal: string; // "gold" | "silver"
   karat: number | null;
+  description?: string | null;
+  gross_weight?: number | null;
   net_weight: number; // grams
   making_charge_percent?: number | null;
   making_charge_flat?: number | null;
