@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AdminShellRouteImport } from './routes/admin._shell'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
@@ -27,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminShellRoute = AdminShellRouteImport.update({
@@ -67,6 +73,7 @@ const AdminShellOrdersRoute = AdminShellOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/checkout': typeof CheckoutRoute
   '/admin/login': typeof AdminLoginRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminShellIndexRoute
+  '/checkout': typeof CheckoutRoute
   '/admin/login': typeof AdminLoginRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/checkout': typeof CheckoutRoute
   '/admin/_shell': typeof AdminShellRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/product/$id': typeof ProductIdRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/checkout'
     | '/admin/login'
     | '/product/$id'
     | '/admin/inventory'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/checkout'
     | '/admin/login'
     | '/product/$id'
     | '/admin/inventory'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/checkout'
     | '/admin/_shell'
     | '/admin/login'
     | '/product/$id'
@@ -131,6 +143,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  CheckoutRoute: typeof CheckoutRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/_shell': {
@@ -235,6 +255,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  CheckoutRoute: CheckoutRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
