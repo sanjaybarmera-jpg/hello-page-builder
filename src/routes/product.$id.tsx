@@ -129,7 +129,7 @@ function ProductDetail() {
     navigate({ to: "/checkout" });
   };
 
-  const submitVisit = (e: FormEvent) => {
+  const submitVisit = async (e: FormEvent) => {
     e.preventDefault();
     if (!visit.name.trim() || !visit.phone.trim() || !visit.date) {
       toast.error("Please fill in your name, phone and preferred date.");
@@ -138,6 +138,21 @@ function ProductDetail() {
     if (!/^[0-9+\-\s]{7,15}$/.test(visit.phone.trim())) {
       toast.error("Please enter a valid phone number.");
       return;
+    }
+    if (supabase) {
+      const { error: visitError } = await supabase.from("home_tryon_requests").insert({
+        customer_name: visit.name.trim(),
+        phone: visit.phone.trim(),
+        preferred_date: visit.date,
+        product_id: String(product.id),
+        product_title: product.name,
+        product_sku: product.sku,
+        status: "PENDING",
+      });
+      if (visitError) {
+        toast.error(visitError.message);
+        return;
+      }
     }
     setVisitOpen(false);
     setVisit({ name: "", phone: "", date: "" });

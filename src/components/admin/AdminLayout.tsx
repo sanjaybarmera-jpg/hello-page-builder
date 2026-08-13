@@ -20,8 +20,8 @@ function useCount(table: string, column: string, pending: string[]) {
       if (!supabase) return 0;
       const { data, error } = await supabase.from(table).select(column);
       if (error) return 0;
-      return (data ?? []).filter((row) => {
-        const value = String((row as Record<string, unknown>)[column] ?? "PENDING");
+      return ((data ?? []) as unknown as Record<string, unknown>[]).filter((row) => {
+        const value = String(row[column] ?? "PENDING");
         return pending.includes(value.toUpperCase());
       }).length;
     },
