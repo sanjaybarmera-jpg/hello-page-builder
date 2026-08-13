@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
+import { RatesTicker } from "@/components/RatesTicker";
+import { CategoryStrip } from "@/components/CategoryStrip";
+import { ProductGrid } from "@/components/ProductGrid";
 
 export const Route = createFileRoute("/")({
   head: () => ({
