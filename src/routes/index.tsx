@@ -94,7 +94,11 @@ function Index() {
             ))}
           </div>
         </section>
+
+        <CategoryStrip />
+        <ProductGrid />
       </main>
+
 
       <footer className="mt-10 border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 text-xs text-muted-foreground">
