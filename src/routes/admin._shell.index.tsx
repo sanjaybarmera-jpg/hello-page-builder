@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMetalRates, useProducts } from "@/hooks/useJewelleryData";
 
-export const Route = createFileRoute("/admin/")({
+export const Route = createFileRoute("/admin/_shell/")({
   component: AdminDashboard,
 });
 

@@ -1,5 +1,7 @@
-import { Link, Outlet } from "@tanstack/react-router";
-import { Boxes, Coins, LayoutDashboard, ReceiptText } from "lucide-react";
+import { Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { Boxes, Coins, LayoutDashboard, LogOut, ReceiptText } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import type { ReactNode } from "react";
 
 const nav = [
@@ -10,6 +12,16 @@ const nav = [
 ] as const;
 
 export function AdminShell({ children }: { children?: ReactNode }) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const handleSignOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase?.auth.signOut();
+    navigate({ to: "/admin/login", replace: true });
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="hidden w-64 shrink-0 border-r border-border bg-card/60 px-4 py-6 md:block">
@@ -33,6 +45,15 @@ export function AdminShell({ children }: { children?: ReactNode }) {
             </Link>
           ))}
         </nav>
+
+        <button
+          type="button"
+          onClick={handleSignOut}
+          className="mt-8 flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          <LogOut className="h-4 w-4" />
+          Logout
+        </button>
       </aside>
       <main className="min-w-0 flex-1 px-5 py-8 md:px-10">{children ?? <Outlet />}</main>
     </div>

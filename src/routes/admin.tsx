@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AdminShell } from "@/components/admin/AdminLayout";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Admin — Ratan Jewellers" },
@@ -11,5 +11,5 @@ export const Route = createFileRoute("/admin")({
       { property: "og:description", content: "Manage inventory, metal rates and orders." },
     ],
   }),
-  component: () => <AdminShell />,
+  component: () => <Outlet />,
 });
