@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
+import { RatesTicker } from "@/components/RatesTicker";
+import { CategoryStrip } from "@/components/CategoryStrip";
+import { ProductGrid } from "@/components/ProductGrid";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,12 +26,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const RATES = [
-  { label: "Gold 24K", value: "₹7,412 / g" },
-  { label: "Gold 22K", value: "₹6,795 / g" },
-  { label: "Silver", value: "₹92.40 / g" },
-];
-
 const CATEGORIES = [
   { name: "Gold", note: "22K & 24K classics" },
   { name: "Diamond", note: "Certified brilliance" },
@@ -39,17 +36,8 @@ const CATEGORIES = [
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-1 px-6 py-2 text-xs tracking-wide">
-          {RATES.map((rate) => (
-            <span key={rate.label} className="flex items-center gap-2">
-              <span className="opacity-70">{rate.label}</span>
-              <span className="font-semibold">{rate.value}</span>
-            </span>
-          ))}
-          <span className="opacity-70">Today&apos;s rates</span>
-        </div>
-      </div>
+      <RatesTicker />
+
 
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
@@ -106,7 +94,11 @@ function Index() {
             ))}
           </div>
         </section>
+
+        <CategoryStrip />
+        <ProductGrid />
       </main>
+
 
       <footer className="mt-10 border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 text-xs text-muted-foreground">
