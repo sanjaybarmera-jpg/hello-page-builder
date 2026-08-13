@@ -1,17 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SupabaseStatus } from "@/components/SupabaseStatus";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Hi — A Simple Greeting Page" },
+      { title: "Ratan Jewellers — Fine Gold & Diamond Jewellery" },
       {
         name: "description",
-        content: "A minimal greeting page that simply says hi, built with a clean and calm design.",
+        content:
+          "Ratan Jewellers: timeless gold, diamond and silver jewellery crafted with heritage precision. Daily gold and silver rates updated.",
       },
-      { property: "og:title", content: "Hi — A Simple Greeting Page" },
+      { property: "og:title", content: "Ratan Jewellers — Fine Gold & Diamond Jewellery" },
       {
         property: "og:description",
-        content: "A minimal greeting page that simply says hi, built with a clean and calm design.",
+        content:
+          "Timeless gold, diamond and silver jewellery crafted with heritage precision. Daily gold and silver rates updated.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -20,16 +23,96 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const RATES = [
+  { label: "Gold 24K", value: "₹7,412 / g" },
+  { label: "Gold 22K", value: "₹6,795 / g" },
+  { label: "Silver", value: "₹92.40 / g" },
+];
+
+const CATEGORIES = [
+  { name: "Gold", note: "22K & 24K classics" },
+  { name: "Diamond", note: "Certified brilliance" },
+  { name: "Silver", note: "Everyday elegance" },
+  { name: "Bridal", note: "Heirloom sets" },
+];
+
 function Index() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-6">
-      <div className="text-center">
-        <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground">Welcome</p>
-        <h1 className="mt-4 text-7xl font-bold tracking-tight text-foreground sm:text-8xl">hi</h1>
-        <p className="mt-6 text-base text-muted-foreground">
-          Nice to see you here. This is your hi page.
-        </p>
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="bg-primary text-primary-foreground">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-1 px-6 py-2 text-xs tracking-wide">
+          {RATES.map((rate) => (
+            <span key={rate.label} className="flex items-center gap-2">
+              <span className="opacity-70">{rate.label}</span>
+              <span className="font-semibold">{rate.value}</span>
+            </span>
+          ))}
+          <span className="opacity-70">Today&apos;s rates</span>
+        </div>
       </div>
-    </main>
+
+      <header className="border-b border-border">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+          <div>
+            <p className="font-serif text-2xl tracking-tight text-primary">Ratan Jewellers</p>
+            <p className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+              Since 1954
+            </p>
+          </div>
+          <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
+            {CATEGORIES.map((c) => (
+              <span key={c.name} className="transition-colors hover:text-primary">
+                {c.name}
+              </span>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-6xl px-6 py-10">
+        <SupabaseStatus />
+
+        <section className="mt-10 grid items-center gap-10 md:grid-cols-2">
+          <div>
+            <p className="text-xs uppercase tracking-[0.4em] text-accent-foreground">
+              The Heritage Edit
+            </p>
+            <h1 className="mt-4 font-serif text-5xl leading-tight tracking-tight text-primary sm:text-6xl">
+              Jewellery made to be remembered
+            </h1>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+              Hallmarked gold, certified diamonds and hand-finished silver — crafted in our own
+              workshops and priced transparently against today&apos;s rates.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+                Explore collections
+              </button>
+              <button className="rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
+                Book an appointment
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {CATEGORIES.map((c) => (
+              <div
+                key={c.name}
+                className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <p className="font-serif text-xl text-primary">{c.name}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{c.note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="mt-10 border-t border-border">
+        <div className="mx-auto max-w-6xl px-6 py-8 text-xs text-muted-foreground">
+          © {new Date().getFullYear()} Ratan Jewellers. All rights reserved.
+        </div>
+      </footer>
+    </div>
   );
 }
