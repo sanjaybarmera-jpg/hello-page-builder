@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useMetalRates, useProducts } from "@/hooks/useJewelleryData";
 import { calculateJewelleryPrice, inr, purityLabel } from "@/lib/jewellery";
 
@@ -22,9 +23,11 @@ export function ProductGrid() {
         {(products ?? []).map((p) => {
           const price = calculateJewelleryPrice(p, metalRates);
           return (
-            <article
+            <Link
               key={p.id}
-              className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+              to="/product/$id"
+              params={{ id: String(p.id) }}
+              className="block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="aspect-4/3 overflow-hidden bg-secondary">
                 {p.image_url ? (
@@ -64,7 +67,7 @@ export function ProductGrid() {
                   {inr(price.gst)}
                 </p>
               </div>
-            </article>
+            </Link>
           );
         })}
       </div>

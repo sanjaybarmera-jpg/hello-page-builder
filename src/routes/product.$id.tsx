@@ -110,7 +110,7 @@ function ProductDetail() {
       productId: String(product.id),
       name: product.name,
       sku: product.sku,
-      image_url: product.image_url,
+      image_url: product.image_url ?? null,
       metal: product.metal,
       karat: isSilver ? null : selectedKarat,
       size,

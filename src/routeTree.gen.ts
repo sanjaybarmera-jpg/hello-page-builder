@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminShellRouteImport } from './routes/admin._shell'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as AdminShellIndexRouteImport } from './routes/admin._shell.index'
 import { Route as AdminShellInventoryRouteImport } from './routes/admin._shell.inventory'
 import { Route as AdminShellMetalRatesRouteImport } from './routes/admin._shell.metal-rates'
@@ -36,6 +37,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AdminRoute,
+} as any)
+const ProductIdRoute = ProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminShellIndexRoute = AdminShellIndexRouteImport.update({
   id: '/',
@@ -62,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
+  '/product/$id': typeof ProductIdRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminShellIndexRoute
   '/admin/login': typeof AdminLoginRoute
+  '/product/$id': typeof ProductIdRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/admin/_shell': typeof AdminShellRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
+  '/product/$id': typeof ProductIdRoute
   '/admin/_shell/inventory': typeof AdminShellInventoryRoute
   '/admin/_shell/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/_shell/orders': typeof AdminShellOrdersRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/admin/login'
+    | '/product/$id'
     | '/admin/inventory'
     | '/admin/metal-rates'
     | '/admin/orders'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/admin/login'
+    | '/product/$id'
     | '/admin/inventory'
     | '/admin/metal-rates'
     | '/admin/orders'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin/_shell'
     | '/admin/login'
+    | '/product/$id'
     | '/admin/_shell/inventory'
     | '/admin/_shell/metal-rates'
     | '/admin/_shell/orders'
@@ -119,6 +131,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,6 +163,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/login'
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/product/$id': {
+      id: '/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof ProductIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/_shell/': {
       id: '/admin/_shell/'
@@ -215,6 +235,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
