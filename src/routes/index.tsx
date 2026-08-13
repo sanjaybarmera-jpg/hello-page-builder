@@ -1,24 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Hi — A Simple Greeting Page" },
+      {
+        name: "description",
+        content: "A minimal greeting page that simply says hi, built with a clean and calm design.",
+      },
+      { property: "og:title", content: "Hi — A Simple Greeting Page" },
+      {
+        property: "og:description",
+        content: "A minimal greeting page that simply says hi, built with a clean and calm design.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="flex min-h-screen items-center justify-center bg-background px-6">
+      <div className="text-center">
+        <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground">Welcome</p>
+        <h1 className="mt-4 text-7xl font-bold tracking-tight text-foreground sm:text-8xl">hi</h1>
+        <p className="mt-6 text-base text-muted-foreground">
+          Nice to see you here. This is your hi page.
+        </p>
+      </div>
+    </main>
   );
 }
