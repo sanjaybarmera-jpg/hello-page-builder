@@ -116,13 +116,17 @@ function ProductDetail() {
       size,
       net_weight: Number(product.net_weight),
       price: price.finalPrice,
+      metalPrice: price.metalPrice,
+      makingCharge: price.makingCharge,
+      gst: price.gst,
+      ratePerGram: price.ratePerGram,
     });
     toast.success(`${product.name} added to cart`);
   };
 
   const buyNow = () => {
     addToCart();
-    navigate({ to: "/" });
+    navigate({ to: "/checkout" });
   };
 
   const submitVisit = (e: FormEvent) => {

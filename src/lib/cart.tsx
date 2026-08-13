@@ -12,6 +12,10 @@ export type CartItem = {
   net_weight: number;
   price: number;
   qty: number;
+  metalPrice?: number;
+  makingCharge?: number;
+  gst?: number;
+  ratePerGram?: number;
 };
 
 type CartContextValue = {
@@ -19,8 +23,12 @@ type CartContextValue = {
   add: (item: Omit<CartItem, "key" | "qty">, qty?: number) => void;
   remove: (key: string) => void;
   clear: () => void;
+  setQty: (key: string, qty: number) => void;
   count: number;
   total: number;
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -28,6 +36,7 @@ const STORAGE_KEY = "rj-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -56,6 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
         return [...prev, { ...item, key, qty }];
       });
+      setIsOpen(true);
     };
 
     return {
@@ -63,10 +73,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
       add,
       remove: (key) => setItems((prev) => prev.filter((i) => i.key !== key)),
       clear: () => setItems([]),
+      setQty: (key, qty) =>
+        setItems((prev) =>
+          qty <= 0
+            ? prev.filter((i) => i.key !== key)
+            : prev.map((i) => (i.key === key ? { ...i, qty } : i)),
+        ),
       count: items.reduce((n, i) => n + i.qty, 0),
       total: items.reduce((n, i) => n + i.price * i.qty, 0),
+      isOpen,
+      openCart: () => setIsOpen(true),
+      closeCart: () => setIsOpen(false),
     };
-  }, [items]);
+  }, [items, isOpen]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
