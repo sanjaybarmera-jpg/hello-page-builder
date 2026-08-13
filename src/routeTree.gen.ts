@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
 import { Route as AdminMetalRatesRouteImport } from './routes/admin.metal-rates'
 import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 
@@ -30,6 +31,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminInventoryRoute = AdminInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMetalRatesRoute = AdminMetalRatesRouteImport.update({
   id: '/metal-rates',
   path: '/metal-rates',
@@ -44,12 +50,14 @@ const AdminOrdersRoute = AdminOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin/inventory': typeof AdminInventoryRoute
   '/admin/metal-rates': typeof AdminMetalRatesRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/inventory': typeof AdminInventoryRoute
   '/admin/metal-rates': typeof AdminMetalRatesRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin': typeof AdminIndexRoute
@@ -58,19 +66,28 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin/inventory': typeof AdminInventoryRoute
   '/admin/metal-rates': typeof AdminMetalRatesRoute
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/admin/metal-rates' | '/admin/orders' | '/admin/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/admin/inventory'
+    | '/admin/metal-rates'
+    | '/admin/orders'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin/metal-rates' | '/admin/orders' | '/admin'
+  to:
+    '/' | '/admin/inventory' | '/admin/metal-rates' | '/admin/orders' | '/admin'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/admin/inventory'
     | '/admin/metal-rates'
     | '/admin/orders'
     | '/admin/'
@@ -104,6 +121,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/inventory': {
+      id: '/admin/inventory'
+      path: '/inventory'
+      fullPath: '/admin/inventory'
+      preLoaderRoute: typeof AdminInventoryRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/metal-rates': {
       id: '/admin/metal-rates'
       path: '/metal-rates'
@@ -122,12 +146,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminInventoryRoute: typeof AdminInventoryRoute
   AdminMetalRatesRoute: typeof AdminMetalRatesRoute
   AdminOrdersRoute: typeof AdminOrdersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminInventoryRoute: AdminInventoryRoute,
   AdminMetalRatesRoute: AdminMetalRatesRoute,
   AdminOrdersRoute: AdminOrdersRoute,
   AdminIndexRoute: AdminIndexRoute,
