@@ -28,7 +28,35 @@ export const Route = createFileRoute("/order-confirmation/$orderId")({
   component: OrderConfirmation,
 });
 
-type OrderRow = Record<string, any>;
+type OrderRow = {
+  id: string | number;
+  order_number: string;
+  created_at?: string | null;
+  payment_mode?: string | null;
+  customer_name?: string | null;
+  customer_phone?: string | null;
+  customer_email?: string | null;
+  shipping_address?: string | null;
+  pincode?: string | null;
+  metal_amount?: number | null;
+  making_amount?: number | null;
+  gst_amount?: number | null;
+  total_amount?: number | null;
+};
+
+type OrderItemRow = {
+  id: string | number;
+  title?: string | null;
+  sku?: string | null;
+  metal?: string | null;
+  karat?: number | null;
+  size?: string | null;
+  net_weight?: number | null;
+  rate_per_gram?: number | null;
+  making_charge?: number | null;
+  quantity?: number | null;
+  line_total?: number | null;
+};
 
 function OrderConfirmation() {
   const { orderId } = Route.useParams();
@@ -49,7 +77,7 @@ function OrderConfirmation() {
         .select("*")
         .eq("order_id", orderId);
       if (iErr) throw new Error(iErr.message);
-      return { order: order as OrderRow, items: (items ?? []) as OrderRow[] };
+      return { order: order as unknown as OrderRow, items: (items ?? []) as unknown as OrderItemRow[] };
     },
   });
 
