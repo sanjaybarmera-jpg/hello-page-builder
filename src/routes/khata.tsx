@@ -79,7 +79,11 @@ function KhataPage() {
           <Link to="/" className="font-serif text-2xl text-primary">
             Ratan Jewellers
           </Link>
-          <Link to="/catalog" className="text-sm text-muted-foreground hover:text-primary">
+          <Link
+            to="/catalog"
+            search={{ q: "", category: "", purity: "", maxWeight: 50, sort: "newest" }}
+            className="text-sm text-muted-foreground hover:text-primary"
+          >
             Catalog
           </Link>
         </div>

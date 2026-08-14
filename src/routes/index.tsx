@@ -47,12 +47,22 @@ function Index() {
               Since 1954
             </p>
           </div>
-          <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             {CATEGORIES.map((c) => (
               <span key={c.name} className="transition-colors hover:text-primary">
                 {c.name}
               </span>
             ))}
+            <Link
+              to="/catalog"
+              search={{ q: "", category: "", purity: "", maxWeight: 50, sort: "newest" }}
+              className="transition-colors hover:text-primary"
+            >
+              Catalog
+            </Link>
+            <Link to="/khata" className="transition-colors hover:text-primary">
+              Track Order / Download Bill
+            </Link>
           </nav>
         </div>
       </header>
