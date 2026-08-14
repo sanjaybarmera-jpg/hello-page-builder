@@ -1,10 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Printer } from "lucide-react";
+import { Printer, MessageCircle, Send, Link2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { inr } from "@/lib/jewellery";
+import {
+  copyToClipboard,
+  generateSmsShareUrl,
+  generateWhatsAppShareUrl,
+  getInvoiceUrl,
+} from "@/lib/shareUtils";
 
 export const Route = createFileRoute("/order-confirmation/$orderId")({
   head: () => ({
@@ -96,6 +103,12 @@ function OrderConfirmation() {
   const taxable = Number(order.metal_amount ?? 0) + Number(order.making_amount ?? 0);
   const gst = Number(order.gst_amount ?? 0);
   const half = gst / 2;
+  const netWeight = items.reduce(
+    (sum, it) => sum + Number(it.net_weight ?? 0) * Number(it.quantity ?? 1),
+    0,
+  );
+  const invoiceUrl = getInvoiceUrl(order.id);
+  const shareOpts = { netWeight };
   const date = order.created_at ? new Date(order.created_at) : new Date();
 
   return (
@@ -114,6 +127,38 @@ function OrderConfirmation() {
             </Button>
             <Button className="rounded-full" onClick={() => window.print()}>
               <Printer className="mr-2 h-4 w-4" /> Print / Download PDF
+            </Button>
+            <Button
+              className="rounded-full bg-[#25D366] text-white hover:bg-[#1ebe5b]"
+              onClick={() =>
+                window.open(
+                  generateWhatsAppShareUrl(order, invoiceUrl, shareOpts),
+                  "_blank",
+                  "noopener",
+                )
+              }
+            >
+              <MessageCircle className="mr-2 h-4 w-4" /> Share via WhatsApp
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full"
+              onClick={() => {
+                window.location.href = generateSmsShareUrl(order, invoiceUrl, shareOpts);
+              }}
+            >
+              <Send className="mr-2 h-4 w-4" /> Share via SMS
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full"
+              onClick={async () => {
+                const ok = await copyToClipboard(invoiceUrl);
+                if (ok) toast.success("Invoice link copied!");
+                else toast.error("Could not copy the link");
+              }}
+            >
+              <Link2 className="mr-2 h-4 w-4" /> Copy Invoice Link
             </Button>
           </div>
         </div>
