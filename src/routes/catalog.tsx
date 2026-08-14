@@ -19,11 +19,11 @@ const str = (v: unknown, d = "") => (typeof v === "string" ? v : d);
 
 export const Route = createFileRoute("/catalog")({
   validateSearch: (search: Record<string, unknown>): Search => ({
-    q: str(search.q),
-    category: str(search.category),
-    purity: str(search.purity),
-    maxWeight: Number(search.maxWeight) > 0 ? Number(search.maxWeight) : 50,
-    sort: str(search.sort, "newest"),
+    q: str(search["q"]),
+    category: str(search["category"]),
+    purity: str(search["purity"]),
+    maxWeight: Number(search["maxWeight"]) > 0 ? Number(search["maxWeight"]) : 50,
+    sort: str(search["sort"], "newest"),
   }),
   head: () => ({
     meta: [
@@ -181,7 +181,7 @@ function CatalogPage() {
               min={0}
               max={50}
               step={1}
-              onValueChange={(v) => setSearch({ maxWeight: v[0] })}
+              onValueChange={(v) => setSearch({ maxWeight: v[0] ?? 50 })}
             />
             <p className="mt-2 text-xs text-muted-foreground">
               0g – {search.maxWeight >= 50 ? "50g+" : `${search.maxWeight}g`}

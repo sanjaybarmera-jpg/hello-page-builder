@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as KhataRouteImport } from './routes/khata'
 import { Route as AdminShellRouteImport } from './routes/admin._shell'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as OrderConfirmationOrderIdRouteImport } from './routes/order-confirmation.$orderId'
@@ -32,9 +34,19 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogRoute = CatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KhataRoute = KhataRouteImport.update({
+  id: '/khata',
+  path: '/khata',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminShellRoute = AdminShellRouteImport.update({
@@ -86,7 +98,9 @@ const AdminShellOrdersRoute = AdminShellOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
+  '/khata': typeof KhataRoute
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
   '/product/$id': typeof ProductIdRoute
@@ -99,7 +113,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminShellIndexRoute
+  '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
+  '/khata': typeof KhataRoute
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
   '/product/$id': typeof ProductIdRoute
@@ -112,7 +128,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
+  '/khata': typeof KhataRoute
   '/admin/_shell': typeof AdminShellRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
@@ -128,7 +146,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/catalog'
     | '/checkout'
+    | '/khata'
     | '/admin/login'
     | '/order-confirmation/$orderId'
     | '/product/$id'
@@ -141,7 +161,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/catalog'
     | '/checkout'
+    | '/khata'
     | '/admin/login'
     | '/order-confirmation/$orderId'
     | '/product/$id'
@@ -153,7 +175,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/catalog'
     | '/checkout'
+    | '/khata'
     | '/admin/_shell'
     | '/admin/login'
     | '/order-confirmation/$orderId'
@@ -168,7 +192,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  CatalogRoute: typeof CatalogRoute
   CheckoutRoute: typeof CheckoutRoute
+  KhataRoute: typeof KhataRoute
   OrderConfirmationOrderIdRoute: typeof OrderConfirmationOrderIdRoute
   ProductIdRoute: typeof ProductIdRoute
 }
@@ -189,11 +215,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalog': {
+      id: '/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof CatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/khata': {
+      id: '/khata'
+      path: '/khata'
+      fullPath: '/khata'
+      preLoaderRoute: typeof KhataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/_shell': {
@@ -297,7 +337,9 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  CatalogRoute: CatalogRoute,
   CheckoutRoute: CheckoutRoute,
+  KhataRoute: KhataRoute,
   OrderConfirmationOrderIdRoute: OrderConfirmationOrderIdRoute,
   ProductIdRoute: ProductIdRoute,
 }
