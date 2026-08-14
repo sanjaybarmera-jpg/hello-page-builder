@@ -2,10 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, MessageCircle } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { inr } from "@/lib/jewellery";
+import { generateWhatsAppShareUrl, getInvoiceUrl } from "@/lib/shareUtils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -192,9 +193,29 @@ function OrdersPage() {
                   </Select>
                 </td>
                 <td className="px-4 py-3">
-                  <Button size="sm" variant="outline" onClick={() => setSelected(o)}>
-                    View details
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" onClick={() => setSelected(o)}>
+                      View details
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="bg-[#25D366] text-white hover:bg-[#1ebe5b]"
+                      title="WhatsApp customer"
+                      onClick={() => {
+                        if (!o.customer_phone) {
+                          toast.error("No phone number on this order");
+                          return;
+                        }
+                        window.open(
+                          generateWhatsAppShareUrl(o, getInvoiceUrl(o.id)),
+                          "_blank",
+                          "noopener",
+                        );
+                      }}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -262,6 +283,32 @@ function OrdersPage() {
                 <span>{inr(Number(selected?.total_amount ?? 0))}</span>
               </div>
             </div>
+
+            {selected && (
+              <Button
+                className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5b]"
+                onClick={() => {
+                  if (!selected.customer_phone) {
+                    toast.error("No phone number on this order");
+                    return;
+                  }
+                  const netWeight = (items.data ?? []).reduce(
+                    (sum, it) =>
+                      sum + Number(it.net_weight ?? 0) * Number(it.quantity ?? 1),
+                    0,
+                  );
+                  window.open(
+                    generateWhatsAppShareUrl(selected, getInvoiceUrl(selected.id), {
+                      netWeight,
+                    }),
+                    "_blank",
+                    "noopener",
+                  );
+                }}
+              >
+                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp Customer
+              </Button>
+            )}
 
             {selected && (
               <Button asChild variant="outline" className="w-full">
