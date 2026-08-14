@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
 import { RatesTicker } from "@/components/RatesTicker";
 import { CategoryStrip } from "@/components/CategoryStrip";
