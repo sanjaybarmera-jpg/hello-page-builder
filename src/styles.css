@@ -193,3 +193,43 @@
     color: #000 !important;
   }
 }
+
+@utility gold-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--gold-antique) 0%,
+    var(--gold) 35%,
+    var(--gold-soft) 50%,
+    var(--gold) 65%,
+    var(--gold-antique) 100%
+  );
+  background-size: 220% 100%;
+  animation: gold-shimmer 6s linear infinite;
+}
+
+@utility gold-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-antique),
+    var(--gold-soft),
+    var(--gold-antique)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility hero-ambient {
+  background-image:
+    radial-gradient(60% 80% at 80% 10%, color-mix(in oklab, var(--gold) 26%, transparent), transparent 70%),
+    radial-gradient(70% 90% at 5% 90%, color-mix(in oklab, var(--emerald-deep) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in oklab, var(--pearl) 92%, transparent), var(--background));
+}
+
+@keyframes gold-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 220% 50%;
+  }
+}
