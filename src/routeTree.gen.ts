@@ -19,6 +19,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as OrderConfirmationOrderIdRouteImport } from './routes/order-confirmation.$orderId'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as AdminShellIndexRouteImport } from './routes/admin._shell.index'
+import { Route as AdminShellCustomOrdersRouteImport } from './routes/admin._shell.custom-orders'
 import { Route as AdminShellCustomersRouteImport } from './routes/admin._shell.customers'
 import { Route as AdminShellInventoryRouteImport } from './routes/admin._shell.inventory'
 import { Route as AdminShellLeadsRouteImport } from './routes/admin._shell.leads'
@@ -76,6 +77,11 @@ const AdminShellIndexRoute = AdminShellIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminShellRoute,
 } as any)
+const AdminShellCustomOrdersRoute = AdminShellCustomOrdersRouteImport.update({
+  id: '/custom-orders',
+  path: '/custom-orders',
+  getParentRoute: () => AdminShellRoute,
+} as any)
 const AdminShellCustomersRoute = AdminShellCustomersRouteImport.update({
   id: '/customers',
   path: '/customers',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/admin/custom-orders': typeof AdminShellCustomOrdersRoute
   '/admin/customers': typeof AdminShellCustomersRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/leads': typeof AdminShellLeadsRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/admin/custom-orders': typeof AdminShellCustomOrdersRoute
   '/admin/customers': typeof AdminShellCustomersRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/leads': typeof AdminShellLeadsRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/order-confirmation/$orderId': typeof OrderConfirmationOrderIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/admin/_shell/custom-orders': typeof AdminShellCustomOrdersRoute
   '/admin/_shell/customers': typeof AdminShellCustomersRoute
   '/admin/_shell/inventory': typeof AdminShellInventoryRoute
   '/admin/_shell/leads': typeof AdminShellLeadsRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/order-confirmation/$orderId'
     | '/product/$id'
+    | '/admin/custom-orders'
     | '/admin/customers'
     | '/admin/inventory'
     | '/admin/leads'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/order-confirmation/$orderId'
     | '/product/$id'
+    | '/admin/custom-orders'
     | '/admin/customers'
     | '/admin/inventory'
     | '/admin/leads'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/order-confirmation/$orderId'
     | '/product/$id'
+    | '/admin/_shell/custom-orders'
     | '/admin/_shell/customers'
     | '/admin/_shell/inventory'
     | '/admin/_shell/leads'
@@ -295,6 +307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminShellIndexRouteImport
       parentRoute: typeof AdminShellRoute
     }
+    '/admin/_shell/custom-orders': {
+      id: '/admin/_shell/custom-orders'
+      path: '/custom-orders'
+      fullPath: '/admin/custom-orders'
+      preLoaderRoute: typeof AdminShellCustomOrdersRouteImport
+      parentRoute: typeof AdminShellRoute
+    }
     '/admin/_shell/customers': {
       id: '/admin/_shell/customers'
       path: '/customers'
@@ -341,6 +360,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminShellRouteChildren {
+  AdminShellCustomOrdersRoute: typeof AdminShellCustomOrdersRoute
   AdminShellCustomersRoute: typeof AdminShellCustomersRoute
   AdminShellInventoryRoute: typeof AdminShellInventoryRoute
   AdminShellLeadsRoute: typeof AdminShellLeadsRoute
@@ -351,6 +371,7 @@ interface AdminShellRouteChildren {
 }
 
 const AdminShellRouteChildren: AdminShellRouteChildren = {
+  AdminShellCustomOrdersRoute: AdminShellCustomOrdersRoute,
   AdminShellCustomersRoute: AdminShellCustomersRoute,
   AdminShellInventoryRoute: AdminShellInventoryRoute,
   AdminShellLeadsRoute: AdminShellLeadsRoute,
