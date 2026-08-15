@@ -101,18 +101,8 @@ function CatalogPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <RatesTicker />
+      <SiteHeader />
 
-      <header className="border-b border-border">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link to="/" className="font-serif text-2xl text-primary">
-            Ratan Jewellers
-          </Link>
-          <Link to="/khata" className="text-sm text-muted-foreground hover:text-primary">
-            Track Order / Download Bill
-          </Link>
-        </div>
-      </header>
 
       <main className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[240px_1fr]">
         <aside className="space-y-8">
