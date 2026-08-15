@@ -18,12 +18,17 @@ import {
 import { Coins, ExternalLink, IndianRupee, Receipt, ScrollText, Weight } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
+import { OwnerOnly } from "@/components/admin/OwnerOnly";
 import { inr } from "@/lib/jewellery";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/_shell/")({
-  component: AdminDashboard,
+  component: () => (
+    <OwnerOnly>
+      <AdminDashboard />
+    </OwnerOnly>
+  ),
 });
 
 type DashOrder = {
