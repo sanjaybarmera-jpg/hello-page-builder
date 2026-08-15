@@ -143,7 +143,9 @@ function Checkout() {
       toast.success(`Order ${number} placed`);
       navigate({ to: "/order-confirmation/$orderId", params: { orderId: String(order.id) } });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not place your order.");
+      toast.error(friendlyError(err), {
+        action: { label: "Retry", onClick: () => void submit(e) },
+      });
     } finally {
       setSaving(false);
     }
