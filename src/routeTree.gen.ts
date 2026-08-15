@@ -23,6 +23,7 @@ import { Route as AdminShellInventoryRouteImport } from './routes/admin._shell.i
 import { Route as AdminShellLeadsRouteImport } from './routes/admin._shell.leads'
 import { Route as AdminShellMetalRatesRouteImport } from './routes/admin._shell.metal-rates'
 import { Route as AdminShellOrdersRouteImport } from './routes/admin._shell.orders'
+import { Route as AdminShellTagsRouteImport } from './routes/admin._shell.tags'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,6 +95,11 @@ const AdminShellOrdersRoute = AdminShellOrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => AdminShellRoute,
 } as any)
+const AdminShellTagsRoute = AdminShellTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => AdminShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/admin/leads': typeof AdminShellLeadsRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
+  '/admin/tags': typeof AdminShellTagsRoute
   '/admin/': typeof AdminShellIndexRoute
 }
 export interface FileRoutesByTo {
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/admin/leads': typeof AdminShellLeadsRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
+  '/admin/tags': typeof AdminShellTagsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/admin/_shell/leads': typeof AdminShellLeadsRoute
   '/admin/_shell/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/_shell/orders': typeof AdminShellOrdersRoute
+  '/admin/_shell/tags': typeof AdminShellTagsRoute
   '/admin/_shell/': typeof AdminShellIndexRoute
 }
 export interface FileRouteTypes {
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/metal-rates'
     | '/admin/orders'
+    | '/admin/tags'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/metal-rates'
     | '/admin/orders'
+    | '/admin/tags'
   id:
     | '__root__'
     | '/'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin/_shell/leads'
     | '/admin/_shell/metal-rates'
     | '/admin/_shell/orders'
+    | '/admin/_shell/tags'
     | '/admin/_shell/'
   fileRoutesById: FileRoutesById
 }
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminShellOrdersRouteImport
       parentRoute: typeof AdminShellRoute
     }
+    '/admin/_shell/tags': {
+      id: '/admin/_shell/tags'
+      path: '/tags'
+      fullPath: '/admin/tags'
+      preLoaderRoute: typeof AdminShellTagsRouteImport
+      parentRoute: typeof AdminShellRoute
+    }
   }
 }
 
@@ -307,6 +326,7 @@ interface AdminShellRouteChildren {
   AdminShellLeadsRoute: typeof AdminShellLeadsRoute
   AdminShellMetalRatesRoute: typeof AdminShellMetalRatesRoute
   AdminShellOrdersRoute: typeof AdminShellOrdersRoute
+  AdminShellTagsRoute: typeof AdminShellTagsRoute
   AdminShellIndexRoute: typeof AdminShellIndexRoute
 }
 
@@ -315,6 +335,7 @@ const AdminShellRouteChildren: AdminShellRouteChildren = {
   AdminShellLeadsRoute: AdminShellLeadsRoute,
   AdminShellMetalRatesRoute: AdminShellMetalRatesRoute,
   AdminShellOrdersRoute: AdminShellOrdersRoute,
+  AdminShellTagsRoute: AdminShellTagsRoute,
   AdminShellIndexRoute: AdminShellIndexRoute,
 }
 
