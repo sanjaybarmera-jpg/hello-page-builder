@@ -41,7 +41,7 @@ function Index() {
   const { data: products } = useProducts();
   const { data: rates } = useMetalRates();
   const metalRates = rates ?? [];
-  const featured = (products ?? []).slice(0, 6);
+  const featured = (products ?? []).slice(0, 8);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -67,13 +67,14 @@ function Index() {
                   search={catalogSearch()}
                   className="rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Explore collections
+                  Explore Entire Catalog
                 </Link>
                 <Link
-                  to="/khata"
+                  to="/catalog"
+                  search={catalogSearch({ purity: "22" })}
                   className="rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
                 >
-                  Track order / bill
+                  View Pure 22K Hallmarked Gold
                 </Link>
               </div>
             </div>
@@ -167,10 +168,45 @@ function Index() {
                       </div>
                       <p className="mt-3 text-lg font-semibold">{inr(price.finalPrice)}</p>
                       <p className="text-[11px] text-muted-foreground">Incl. 3% GST</p>
+                      <span className="mt-4 inline-block rounded-full bg-primary px-5 py-2 text-xs font-medium text-primary-foreground transition-opacity group-hover:opacity-90">
+                        View details
+                      </span>
                     </div>
                   </Link>
                 );
               })}
+            </div>
+          </section>
+
+          <section className="mt-16 grid gap-6 md:grid-cols-2">
+            <div className="rounded-3xl border border-border bg-card p-8">
+              <p className="text-xs uppercase tracking-[0.4em] text-accent-foreground">Bespoke</p>
+              <h3 className="mt-3 font-serif text-3xl text-primary">
+                Bespoke &amp; custom jewellery
+              </h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Bring us a sketch or an heirloom — our karigars craft it in 22K hallmarked gold.
+              </p>
+              <Link
+                to="/catalog"
+                search={catalogSearch()}
+                className="mt-6 inline-block rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Start your custom design
+              </Link>
+            </div>
+            <div className="rounded-3xl border border-border bg-card p-8">
+              <p className="text-xs uppercase tracking-[0.4em] text-accent-foreground">Khata</p>
+              <h3 className="mt-3 font-serif text-3xl text-primary">Already placed an order?</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Look up your purchase history and download your GST tax invoice instantly.
+              </p>
+              <Link
+                to="/khata"
+                className="mt-6 inline-block rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                Lookup Your Bill &amp; Khata
+              </Link>
             </div>
           </section>
 

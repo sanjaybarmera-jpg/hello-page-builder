@@ -52,14 +52,20 @@ export function SiteFooter() {
         <div className="text-sm text-muted-foreground">
           <p className="text-xs uppercase tracking-[0.3em] text-foreground">Quick links</p>
           <div className="mt-3 flex flex-col gap-2">
+            <Link to="/" className="hover:text-primary">
+              Home
+            </Link>
             <Link to="/catalog" search={catalogSearch()} className="hover:text-primary">
               All Jewellery
             </Link>
             <Link to="/khata" className="hover:text-primary">
               Track Order / Download Bill
             </Link>
+            <a href={WHATSAPP} target="_blank" rel="noreferrer" className="hover:text-primary">
+              WhatsApp Support
+            </a>
             <Link to="/admin/login" className="hover:text-primary">
-              Staff Login
+              Admin Login
             </Link>
           </div>
         </div>
