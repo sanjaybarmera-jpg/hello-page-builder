@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { logActivity } from "@/lib/auditLogger";
 
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,11 @@ export function ProductEditDialog({
         })
         .eq("id", product.id);
       if (error) throw new Error(error.message);
+      await logActivity({
+        actionType: "UPDATE",
+        entityType: "PRODUCT",
+        details: `Updated SKU ${product.sku} — ${state.name.trim()} net weight to ${net}g`,
+      });
     },
     onSuccess: () => {
       toast.success("Product updated");

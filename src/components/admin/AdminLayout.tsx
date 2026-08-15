@@ -4,6 +4,7 @@ import {
   CalendarHeart,
   Coins,
   Gem,
+  History,
   LayoutDashboard,
   LogOut,
   ReceiptText,
@@ -50,6 +51,7 @@ export function AdminShell({ children }: { children?: ReactNode }) {
     { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0, ownerOnly: false },
     { to: "/admin/customers", label: "Customers & Khata", icon: Users, count: 0, ownerOnly: false },
     { to: "/admin/custom-orders", label: "Custom Orders", icon: Gem, count: 0, ownerOnly: false },
+    { to: "/admin/logs", label: "Audit Logs", icon: History, count: 0, ownerOnly: true },
   ] as const;
 
   const handleSignOut = async () => {

@@ -23,6 +23,7 @@ import { Route as AdminShellCustomOrdersRouteImport } from './routes/admin._shel
 import { Route as AdminShellCustomersRouteImport } from './routes/admin._shell.customers'
 import { Route as AdminShellInventoryRouteImport } from './routes/admin._shell.inventory'
 import { Route as AdminShellLeadsRouteImport } from './routes/admin._shell.leads'
+import { Route as AdminShellLogsRouteImport } from './routes/admin._shell.logs'
 import { Route as AdminShellMetalRatesRouteImport } from './routes/admin._shell.metal-rates'
 import { Route as AdminShellOrdersRouteImport } from './routes/admin._shell.orders'
 import { Route as AdminShellTagsRouteImport } from './routes/admin._shell.tags'
@@ -97,6 +98,11 @@ const AdminShellLeadsRoute = AdminShellLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminShellRoute,
 } as any)
+const AdminShellLogsRoute = AdminShellLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => AdminShellRoute,
+} as any)
 const AdminShellMetalRatesRoute = AdminShellMetalRatesRouteImport.update({
   id: '/metal-rates',
   path: '/metal-rates',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/admin/customers': typeof AdminShellCustomersRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/leads': typeof AdminShellLeadsRoute
+  '/admin/logs': typeof AdminShellLogsRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
   '/admin/tags': typeof AdminShellTagsRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/admin/customers': typeof AdminShellCustomersRoute
   '/admin/inventory': typeof AdminShellInventoryRoute
   '/admin/leads': typeof AdminShellLeadsRoute
+  '/admin/logs': typeof AdminShellLogsRoute
   '/admin/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/orders': typeof AdminShellOrdersRoute
   '/admin/tags': typeof AdminShellTagsRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/admin/_shell/customers': typeof AdminShellCustomersRoute
   '/admin/_shell/inventory': typeof AdminShellInventoryRoute
   '/admin/_shell/leads': typeof AdminShellLeadsRoute
+  '/admin/_shell/logs': typeof AdminShellLogsRoute
   '/admin/_shell/metal-rates': typeof AdminShellMetalRatesRoute
   '/admin/_shell/orders': typeof AdminShellOrdersRoute
   '/admin/_shell/tags': typeof AdminShellTagsRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/inventory'
     | '/admin/leads'
+    | '/admin/logs'
     | '/admin/metal-rates'
     | '/admin/orders'
     | '/admin/tags'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/inventory'
     | '/admin/leads'
+    | '/admin/logs'
     | '/admin/metal-rates'
     | '/admin/orders'
     | '/admin/tags'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/admin/_shell/customers'
     | '/admin/_shell/inventory'
     | '/admin/_shell/leads'
+    | '/admin/_shell/logs'
     | '/admin/_shell/metal-rates'
     | '/admin/_shell/orders'
     | '/admin/_shell/tags'
@@ -335,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminShellLeadsRouteImport
       parentRoute: typeof AdminShellRoute
     }
+    '/admin/_shell/logs': {
+      id: '/admin/_shell/logs'
+      path: '/logs'
+      fullPath: '/admin/logs'
+      preLoaderRoute: typeof AdminShellLogsRouteImport
+      parentRoute: typeof AdminShellRoute
+    }
     '/admin/_shell/metal-rates': {
       id: '/admin/_shell/metal-rates'
       path: '/metal-rates'
@@ -364,6 +383,7 @@ interface AdminShellRouteChildren {
   AdminShellCustomersRoute: typeof AdminShellCustomersRoute
   AdminShellInventoryRoute: typeof AdminShellInventoryRoute
   AdminShellLeadsRoute: typeof AdminShellLeadsRoute
+  AdminShellLogsRoute: typeof AdminShellLogsRoute
   AdminShellMetalRatesRoute: typeof AdminShellMetalRatesRoute
   AdminShellOrdersRoute: typeof AdminShellOrdersRoute
   AdminShellTagsRoute: typeof AdminShellTagsRoute
@@ -375,6 +395,7 @@ const AdminShellRouteChildren: AdminShellRouteChildren = {
   AdminShellCustomersRoute: AdminShellCustomersRoute,
   AdminShellInventoryRoute: AdminShellInventoryRoute,
   AdminShellLeadsRoute: AdminShellLeadsRoute,
+  AdminShellLogsRoute: AdminShellLogsRoute,
   AdminShellMetalRatesRoute: AdminShellMetalRatesRoute,
   AdminShellOrdersRoute: AdminShellOrdersRoute,
   AdminShellTagsRoute: AdminShellTagsRoute,

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
+import { logActivity } from "@/lib/auditLogger";
 import { ExternalLink, MessageCircle } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -96,6 +97,11 @@ function OrdersPage() {
         .update({ order_status: status })
         .eq("id", id);
       if (err) throw new Error(err.message);
+      await logActivity({
+        actionType: "UPDATE",
+        entityType: "ORDER",
+        details: `Order status changed to ${status}`,
+      });
     },
     onSuccess: () => {
       toast.success("Order status updated");
