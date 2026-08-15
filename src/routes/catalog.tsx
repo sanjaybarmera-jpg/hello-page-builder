@@ -5,7 +5,8 @@ import { calculateJewelleryPrice, inr, purityLabel } from "@/lib/jewellery";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
-import { RatesTicker } from "@/components/RatesTicker";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 type Search = {
   q: string;
