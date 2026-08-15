@@ -43,13 +43,13 @@ export function AdminShell({ children }: { children?: ReactNode }) {
 
   const nav = [
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard, count: 0, ownerOnly: true },
-    { to: "/admin/inventory", label: "Inventory", icon: Boxes, count: 0 },
+    { to: "/admin/inventory", label: "Inventory", icon: Boxes, count: 0, ownerOnly: false },
     { to: "/admin/metal-rates", label: "Metal Rates", icon: Coins, count: 0, ownerOnly: true },
-    { to: "/admin/tags", label: "Tags & Barcodes", icon: Tags, count: 0 },
-    { to: "/admin/orders", label: "Orders", icon: ReceiptText, count: pendingOrders.data ?? 0 },
-    { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0 },
-    { to: "/admin/customers", label: "Customers & Khata", icon: Users, count: 0 },
-    { to: "/admin/custom-orders", label: "Custom Orders", icon: Gem, count: 0 },
+    { to: "/admin/tags", label: "Tags & Barcodes", icon: Tags, count: 0, ownerOnly: false },
+    { to: "/admin/orders", label: "Orders", icon: ReceiptText, count: pendingOrders.data ?? 0, ownerOnly: false },
+    { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0, ownerOnly: false },
+    { to: "/admin/customers", label: "Customers & Khata", icon: Users, count: 0, ownerOnly: false },
+    { to: "/admin/custom-orders", label: "Custom Orders", icon: Gem, count: 0, ownerOnly: false },
   ] as const;
 
   const handleSignOut = async () => {
