@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   LogOut,
   ReceiptText,
+  Tags,
 } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,6 +40,7 @@ export function AdminShell({ children }: { children?: ReactNode }) {
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard, count: 0 },
     { to: "/admin/inventory", label: "Inventory", icon: Boxes, count: 0 },
     { to: "/admin/metal-rates", label: "Metal Rates", icon: Coins, count: 0 },
+    { to: "/admin/tags", label: "Tags & Barcodes", icon: Tags, count: 0 },
     { to: "/admin/orders", label: "Orders", icon: ReceiptText, count: pendingOrders.data ?? 0 },
     { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0 },
   ] as const;
