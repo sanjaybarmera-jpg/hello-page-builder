@@ -42,6 +42,12 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-antique: var(--gold-antique);
+  --color-gold-soft: var(--gold-soft);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-pearl: var(--pearl);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -65,25 +71,31 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.22 0.045 255);
-  --card: oklch(0.995 0.004 85);
-  --card-foreground: oklch(0.22 0.045 255);
-  --popover: oklch(0.995 0.004 85);
-  --popover-foreground: oklch(0.22 0.045 255);
-  --primary: oklch(0.27 0.075 258);
-  --primary-foreground: oklch(0.985 0.008 85);
-  --secondary: oklch(0.955 0.014 85);
-  --secondary-foreground: oklch(0.27 0.075 258);
-  --muted: oklch(0.95 0.012 85);
-  --muted-foreground: oklch(0.52 0.03 255);
-  --accent: oklch(0.93 0.05 165);
-  --accent-foreground: oklch(0.42 0.09 165);
+  --background: oklch(0.978 0.006 80);
+  --foreground: oklch(0.24 0.035 165);
+  --card: oklch(0.993 0.004 85);
+  --card-foreground: oklch(0.24 0.035 165);
+  --popover: oklch(0.993 0.004 85);
+  --popover-foreground: oklch(0.24 0.035 165);
+  --primary: oklch(0.24 0.05 163);
+  --primary-foreground: oklch(0.978 0.012 85);
+  --secondary: oklch(0.955 0.012 85);
+  --secondary-foreground: oklch(0.24 0.05 163);
+  --muted: oklch(0.949 0.01 85);
+  --muted-foreground: oklch(0.52 0.022 165);
+  --accent: oklch(0.76 0.13 88);
+  --accent-foreground: oklch(0.24 0.05 163);
   --destructive: oklch(0.55 0.2 27.325);
   --destructive-foreground: oklch(0.985 0.008 85);
   --border: oklch(0.9 0.014 85);
   --input: oklch(0.9 0.014 85);
-  --ring: oklch(0.45 0.09 165);
+  --ring: oklch(0.71 0.09 82);
+  --gold: oklch(0.76 0.13 88);
+  --gold-antique: oklch(0.71 0.09 80);
+  --gold-soft: oklch(0.9 0.06 88);
+  --emerald-deep: oklch(0.24 0.05 163);
+  --pearl: oklch(0.978 0.006 80);
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -100,6 +112,12 @@
 }
 
 .dark {
+  --gold: oklch(0.78 0.13 88);
+  --gold-antique: oklch(0.72 0.09 80);
+  --gold-soft: oklch(0.86 0.07 88);
+  --emerald-deep: oklch(0.2 0.045 163);
+  --pearl: oklch(0.978 0.006 80);
+
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -173,5 +191,45 @@
     border: 1px solid #000 !important;
     background: #fff !important;
     color: #000 !important;
+  }
+}
+
+@utility gold-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--gold-antique) 0%,
+    var(--gold) 35%,
+    var(--gold-soft) 50%,
+    var(--gold) 65%,
+    var(--gold-antique) 100%
+  );
+  background-size: 220% 100%;
+  animation: gold-shimmer 6s linear infinite;
+}
+
+@utility gold-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-antique),
+    var(--gold-soft),
+    var(--gold-antique)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility hero-ambient {
+  background-image:
+    radial-gradient(60% 80% at 80% 10%, color-mix(in oklab, var(--gold) 26%, transparent), transparent 70%),
+    radial-gradient(70% 90% at 5% 90%, color-mix(in oklab, var(--emerald-deep) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in oklab, var(--pearl) 92%, transparent), var(--background));
+}
+
+@keyframes gold-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 220% 50%;
   }
 }
