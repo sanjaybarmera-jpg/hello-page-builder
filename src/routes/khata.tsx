@@ -3,7 +3,8 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { inr } from "@/lib/jewellery";
-import { RatesTicker } from "@/components/RatesTicker";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const Route = createFileRoute("/khata")({
   head: () => ({
@@ -72,22 +73,7 @@ function KhataPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <RatesTicker />
-
-      <header className="border-b border-border">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
-          <Link to="/" className="font-serif text-2xl text-primary">
-            Ratan Jewellers
-          </Link>
-          <Link
-            to="/catalog"
-            search={{ q: "", category: "", purity: "", maxWeight: 50, sort: "newest" }}
-            className="text-sm text-muted-foreground hover:text-primary"
-          >
-            Catalog
-          </Link>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto max-w-4xl px-6 py-12">
         <h1 className="font-serif text-4xl text-primary">Your Khata</h1>
@@ -161,6 +147,8 @@ function KhataPage() {
           ))}
         </div>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
