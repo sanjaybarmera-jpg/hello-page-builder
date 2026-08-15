@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState, type DragEvent, type FormEvent } from "react";
 import { FileDown, ImagePlus, Loader2, Pencil, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
+import { logActivity } from "@/lib/auditLogger";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
@@ -124,6 +125,11 @@ function InventoryPage() {
 
       const { error } = await supabase.from("products").insert(payload);
       if (error) throw new Error(error.message);
+      await logActivity({
+        actionType: "CREATE",
+        entityType: "PRODUCT",
+        details: `Created SKU ${payload.sku} — ${payload.name} (${payload.net_weight}g)`,
+      });
     },
     onSuccess: () => {
       toast.success("Item added to inventory");
@@ -149,6 +155,11 @@ function InventoryPage() {
       if (!deleting) throw new Error("Nothing to delete.");
       const { error } = await supabase.from("products").delete().eq("id", deleting.id);
       if (error) throw new Error(error.message);
+      await logActivity({
+        actionType: "DELETE",
+        entityType: "PRODUCT",
+        details: `Deleted SKU ${deleting.sku} — ${deleting.name ?? ""}`.trim(),
+      });
     },
     onSuccess: () => {
       toast.success("Product deleted");

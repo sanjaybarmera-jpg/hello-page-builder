@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { logActivity } from "@/lib/auditLogger";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useMetalRates } from "@/hooks/useJewelleryData";
@@ -62,6 +63,16 @@ function MetalRatesPage() {
         .from("metal_rates")
         .upsert(payload, { onConflict: "metal,karat" });
       if (error) throw new Error(error.message);
+      await logActivity({
+        actionType: "UPDATE",
+        entityType: "RATE",
+        details: payload
+          .map(
+            (r) =>
+              `Changed ${r.karat ? `${r.karat}K ` : ""}${r.metal} rate to ₹${r.rate_per_gram}/g`,
+          )
+          .join("; "),
+      });
     },
     onSuccess: () => {
       toast.success("Rates updated — ticker and prices refreshed");
