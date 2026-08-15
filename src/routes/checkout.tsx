@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
+import { friendlyError, sanitizePhone, sanitizeText } from "@/lib/sanitize";
 import { useCart } from "@/lib/cart";
 import { inr } from "@/lib/jewellery";
 import { Button } from "@/components/ui/button";
@@ -70,11 +71,11 @@ function Checkout() {
       toast.error("Your bag is empty.");
       return;
     }
-    if (!form.full_name.trim() || !form.phone.trim() || !form.address.trim() || !form.pincode.trim()) {
+    if (!sanitizeText(form.full_name) || !sanitizePhone(form.phone) || !sanitizeText(form.address) || !sanitizeText(form.pincode)) {
       toast.error("Please fill in name, phone, address and pincode.");
       return;
     }
-    if (!/^[0-9+\-\s]{7,15}$/.test(form.phone.trim())) {
+    if (!/^[0-9+\-\s]{7,15}$/.test(sanitizePhone(form.phone))) {
       toast.error("Please enter a valid phone number.");
       return;
     }
@@ -85,11 +86,11 @@ function Checkout() {
         .from("customers")
         .upsert(
           {
-            full_name: form.full_name.trim(),
-            phone: form.phone.trim(),
-            email: form.email.trim() || null,
-            address: form.address.trim(),
-            pincode: form.pincode.trim(),
+            full_name: sanitizeText(form.full_name),
+            phone: sanitizePhone(form.phone),
+            email: sanitizeText(form.email) || null,
+            address: sanitizeText(form.address),
+            pincode: sanitizeText(form.pincode),
           },
           { onConflict: "phone" },
         )
@@ -103,11 +104,11 @@ function Checkout() {
         .insert({
           order_number: number,
           customer_id: customer?.id ?? null,
-          customer_name: form.full_name.trim(),
-          customer_phone: form.phone.trim(),
-          customer_email: form.email.trim() || null,
-          shipping_address: form.address.trim(),
-          pincode: form.pincode.trim(),
+          customer_name: sanitizeText(form.full_name),
+          customer_phone: sanitizePhone(form.phone),
+          customer_email: sanitizeText(form.email) || null,
+          shipping_address: sanitizeText(form.address),
+          pincode: sanitizeText(form.pincode),
           payment_mode: payment,
           status: "pending",
           metal_amount: metal,
@@ -142,7 +143,9 @@ function Checkout() {
       toast.success(`Order ${number} placed`);
       navigate({ to: "/order-confirmation/$orderId", params: { orderId: String(order.id) } });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not place your order.");
+      toast.error(friendlyError(err), {
+        action: { label: "Retry", onClick: () => void submit(e) },
+      });
     } finally {
       setSaving(false);
     }
