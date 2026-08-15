@@ -140,6 +140,25 @@ function InventoryPage() {
     mutation.mutate();
   };
 
+  const [editing, setEditing] = useState<Product | null>(null);
+  const [deleting, setDeleting] = useState<Product | null>(null);
+
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      if (!supabase) throw new Error("Supabase is not configured.");
+      if (!deleting) throw new Error("Nothing to delete.");
+      const { error } = await supabase.from("products").delete().eq("id", deleting.id);
+      if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+      toast.success("Product deleted");
+      qc.invalidateQueries({ queryKey: ["products"] });
+      setDeleting(null);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+
   const fieldClass = "mt-1.5";
   const selectClass =
     "mt-1.5 h-10 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring";
