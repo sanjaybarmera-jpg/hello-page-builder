@@ -129,6 +129,9 @@ export function parseInventoryCsv(text: string, categories: Category[]): ImportR
   const table = parseCsv(text);
   const errors: string[] = [];
   const rows: ImportRow[] = [];
+  const fail = (message: string): void => {
+    errors.push(message);
+  };
   if (table.length < 2) return { rows, errors: ["CSV has no data rows."] };
 
   const header = (table[0] ?? []).map((h) => h.trim().toLowerCase());
@@ -142,18 +145,18 @@ export function parseInventoryCsv(text: string, categories: Category[]): ImportR
     const netRaw = get(line, "Net_Weight_g");
     const purity = get(line, "Purity").toUpperCase();
 
-    if (!sku) return errors.push(`Row ${rowNo}: SKU is required.`);
-    if (!name) return errors.push(`Row ${rowNo}: Title is required.`);
+    if (!sku) return fail(`Row ${rowNo}: SKU is required.`);
+    if (!name) return fail(`Row ${rowNo}: Title is required.`);
     const net = Number(netRaw);
     if (!netRaw || Number.isNaN(net) || net <= 0)
-      return errors.push(`Row ${rowNo}: Net weight must be a positive number.`);
-    if (!purity) return errors.push(`Row ${rowNo}: Purity is required.`);
+      return fail(`Row ${rowNo}: Net weight must be a positive number.`);
+    if (!purity) return fail(`Row ${rowNo}: Purity is required.`);
 
     const karatMatch = purity.match(/(\d{2})\s*K/);
     const karat = karatMatch ? Number(karatMatch[1]) : null;
     const metal = karat ? "gold" : "silver";
     if (karat && ![14, 18, 22, 24].includes(karat))
-      return errors.push(`Row ${rowNo}: Purity must be 14K, 18K, 22K or 24K.`);
+      return fail(`Row ${rowNo}: Purity must be 14K, 18K, 22K or 24K.`);
 
     const grossRaw = get(line, "Gross_Weight_g");
     const gross = grossRaw ? Number(grossRaw) : null;
