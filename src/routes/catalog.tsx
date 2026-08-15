@@ -252,6 +252,8 @@ function CatalogPage() {
           )}
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }
