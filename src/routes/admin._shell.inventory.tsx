@@ -360,9 +360,27 @@ function InventoryPage() {
       </form>
 
       <section>
-        <h2 className="font-serif text-xl text-foreground">Current inventory</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="font-serif text-xl text-foreground">Current inventory</h2>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              onClick={() =>
+                downloadCsv(
+                  `ratan_jewellers_inventory_${new Date().toISOString().slice(0, 10)}.csv`,
+                  buildInventoryCsv(products.data ?? [], categories.data ?? []),
+                )
+              }
+              disabled={(products.data ?? []).length === 0}
+            >
+              <FileDown className="mr-2 h-4 w-4" />
+              Export to CSV
+            </Button>
+            <ImportCsvDialog categories={categories.data ?? []} />
+          </div>
+        </div>
         <div className="mt-4 overflow-x-auto rounded-xl border border-border bg-card">
-          <table className="w-full min-w-[640px] text-sm">
+          <table className="w-full min-w-[720px] text-sm">
             <thead className="bg-muted/40 text-left text-xs uppercase tracking-widest text-muted-foreground">
               <tr>
                 <th className="px-4 py-3">Item</th>
@@ -370,6 +388,7 @@ function InventoryPage() {
                 <th className="px-4 py-3">Purity</th>
                 <th className="px-4 py-3">Net wt</th>
                 <th className="px-4 py-3">Live price</th>
+                <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -382,11 +401,28 @@ function InventoryPage() {
                   <td className="px-4 py-3 text-foreground">
                     {inr(calculateJewelleryPrice(p, rates.data ?? []).finalPrice)}
                   </td>
+                  <td className="px-4 py-3">
+                    <div className="flex justify-end gap-2">
+                      <Button size="sm" variant="outline" onClick={() => setEditing(p)}>
+                        <Pencil className="mr-1.5 h-3.5 w-3.5" />
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-destructive"
+                        onClick={() => setDeleting(p)}
+                      >
+                        <Trash2 className="mr-1.5 h-3.5 w-3.5" />
+                        Delete
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {!products.isLoading && (products.data ?? []).length === 0 && (
                 <tr>
-                  <td className="px-4 py-6 text-center text-muted-foreground" colSpan={5}>
+                  <td className="px-4 py-6 text-center text-muted-foreground" colSpan={6}>
                     No products yet.
                   </td>
                 </tr>
@@ -395,6 +431,33 @@ function InventoryPage() {
           </table>
         </div>
       </section>
+
+      <ProductEditDialog
+        product={editing}
+        categories={categories.data ?? []}
+        onOpenChange={(open) => !open && setEditing(null)}
+      />
+
+      <AlertDialog open={Boolean(deleting)} onOpenChange={(open) => !open && setDeleting(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete product?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete SKU {deleting?.sku}? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteMutation.mutate()}
+              disabled={deleteMutation.isPending}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
+
