@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { friendlyError, sanitizePhone } from "@/lib/sanitize";
 import { Input } from "@/components/ui/input";
 import { inr } from "@/lib/jewellery";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -54,11 +55,11 @@ function KhataPage() {
     const { data, error: err } = await supabase
       .from("orders")
       .select("*, order_items(id)")
-      .eq("customer_phone", phone.trim())
+      .eq("customer_phone", sanitizePhone(phone))
       .order("created_at", { ascending: false });
 
     if (err) {
-      setError(err.message);
+      setError(friendlyError(err));
       setOrders(null);
     } else {
       setOrders(
@@ -84,7 +85,7 @@ function KhataPage() {
         <form onSubmit={lookup} className="mt-6 flex flex-wrap gap-3">
           <Input
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(sanitizePhone(e.target.value))}
             placeholder="Phone number"
             inputMode="tel"
             className="max-w-xs"
