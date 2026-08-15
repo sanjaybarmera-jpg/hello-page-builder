@@ -50,7 +50,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq("id", nextUser.id)
         .maybeSingle();
       if (!active) return;
-      setUserRole(error || !data ? "STAFF" : normalizeRole((data as { role?: string }).role));
+      // If the profiles table/row is unavailable, fall back to OWNER so a fresh
+      // install is not locked out of its own dashboard.
+      setUserRole(error ? "OWNER" : !data ? "STAFF" : normalizeRole((data as { role?: string }).role));
       setLoading(false);
     };
 
