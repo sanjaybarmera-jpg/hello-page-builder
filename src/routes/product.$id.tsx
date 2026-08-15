@@ -8,6 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useCategories, useMetalRates } from "@/hooks/useJewelleryData";
 import { calculateJewelleryPrice, inr, type Product } from "@/lib/jewellery";
 import { useCart } from "@/lib/cart";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -167,7 +169,9 @@ function ProductDetail() {
     }`;
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-10">
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
+      <main className="mx-auto max-w-6xl px-6 py-10">
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
         <Link to="/" className="hover:text-foreground">
           Home
@@ -371,6 +375,8 @@ function ProductDetail() {
         </div>
       </div>
     </main>
+      <SiteFooter />
+    </div>
   );
 }
 

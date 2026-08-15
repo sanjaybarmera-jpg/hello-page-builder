@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { inr } from "@/lib/jewellery";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import {
   copyToClipboard,
   generateSmsShareUrl,
@@ -113,6 +115,9 @@ function OrderConfirmation() {
 
   return (
     <div className="min-h-screen bg-background print:bg-white">
+      <div className="print:hidden">
+        <SiteHeader showCategories={false} />
+      </div>
       <div className="mx-auto max-w-4xl px-6 py-12">
         <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
           <div>
@@ -258,6 +263,10 @@ function OrderConfirmation() {
             time of order. All jewellery is BIS hallmarked.
           </p>
         </article>
+      </div>
+
+      <div className="print:hidden">
+        <SiteFooter />
       </div>
     </div>
   );

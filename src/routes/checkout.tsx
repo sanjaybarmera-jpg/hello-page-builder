@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -148,6 +150,7 @@ function Checkout() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SiteHeader showCategories={false} />
       <div className="mx-auto max-w-5xl px-6 py-12">
         <Link to="/" className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
           ← Continue shopping
@@ -227,6 +230,8 @@ function Checkout() {
           </aside>
         </div>
       </div>
+
+      <SiteFooter />
     </div>
   );
 }
