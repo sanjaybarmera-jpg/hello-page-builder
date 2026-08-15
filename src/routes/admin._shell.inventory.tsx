@@ -1,16 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState, type DragEvent, type FormEvent } from "react";
-import { ImagePlus, Loader2, X } from "lucide-react";
+import { FileDown, ImagePlus, Loader2, Pencil, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
-import { calculateJewelleryPrice, inr, purityLabel } from "@/lib/jewellery";
+import { calculateJewelleryPrice, inr, purityLabel, type Product } from "@/lib/jewellery";
+import { buildInventoryCsv, downloadCsv } from "@/lib/csv";
+import { ImportCsvDialog } from "@/components/admin/ImportCsvDialog";
+import { ProductEditDialog } from "@/components/admin/ProductEditDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+
 
 export const Route = createFileRoute("/admin/_shell/inventory")({
   component: InventoryPage,
