@@ -13,6 +13,7 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { ReactNode } from "react";
+import { useAdminAuth } from "@/context/AuthContext";
 
 function useCount(table: string, column: string, pending: string[]) {
   return useQuery({
@@ -38,15 +39,17 @@ export function AdminShell({ children }: { children?: ReactNode }) {
   const pendingOrders = useCount("orders", "order_status", ["PROCESSING", "READY", "PENDING"]);
   const pendingLeads = useCount("home_tryon_requests", "status", ["PENDING"]);
 
+  const { user, userRole, isOwner } = useAdminAuth();
+
   const nav = [
-    { to: "/admin", label: "Dashboard", icon: LayoutDashboard, count: 0 },
-    { to: "/admin/inventory", label: "Inventory", icon: Boxes, count: 0 },
-    { to: "/admin/metal-rates", label: "Metal Rates", icon: Coins, count: 0 },
-    { to: "/admin/tags", label: "Tags & Barcodes", icon: Tags, count: 0 },
-    { to: "/admin/orders", label: "Orders", icon: ReceiptText, count: pendingOrders.data ?? 0 },
-    { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0 },
-    { to: "/admin/customers", label: "Customers & Khata", icon: Users, count: 0 },
-    { to: "/admin/custom-orders", label: "Custom Orders", icon: Gem, count: 0 },
+    { to: "/admin", label: "Dashboard", icon: LayoutDashboard, count: 0, ownerOnly: true },
+    { to: "/admin/inventory", label: "Inventory", icon: Boxes, count: 0, ownerOnly: false },
+    { to: "/admin/metal-rates", label: "Metal Rates", icon: Coins, count: 0, ownerOnly: true },
+    { to: "/admin/tags", label: "Tags & Barcodes", icon: Tags, count: 0, ownerOnly: false },
+    { to: "/admin/orders", label: "Orders", icon: ReceiptText, count: pendingOrders.data ?? 0, ownerOnly: false },
+    { to: "/admin/leads", label: "Leads", icon: CalendarHeart, count: pendingLeads.data ?? 0, ownerOnly: false },
+    { to: "/admin/customers", label: "Customers & Khata", icon: Users, count: 0, ownerOnly: false },
+    { to: "/admin/custom-orders", label: "Custom Orders", icon: Gem, count: 0, ownerOnly: false },
   ] as const;
 
   const handleSignOut = async () => {
@@ -65,8 +68,17 @@ export function AdminShell({ children }: { children?: ReactNode }) {
             Jewellers
           </p>
         </Link>
-        <nav className="mt-8 space-y-1">
-          {nav.map(({ to, label, icon: Icon, count }) => (
+        <div className="mt-6 rounded-lg border border-border bg-background/60 px-3 py-2">
+          <p className="truncate text-xs text-muted-foreground">{user?.email ?? "Signed in"}</p>
+          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+            {userRole === "OWNER" ? "\u{1F451} Owner" : userRole === "STAFF" ? "\u{1F464} Staff" : "\u2026"}
+          </span>
+        </div>
+
+        <nav className="mt-6 space-y-1">
+          {nav
+            .filter((item) => isOwner || !item.ownerOnly)
+            .map(({ to, label, icon: Icon, count }) => (
             <Link
               key={to}
               to={to}

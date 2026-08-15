@@ -8,10 +8,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useMetalRates } from "@/hooks/useJewelleryData";
 import { inr, type MetalRate } from "@/lib/jewellery";
 import { Button } from "@/components/ui/button";
+import { OwnerOnly } from "@/components/admin/OwnerOnly";
 import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/admin/_shell/metal-rates")({
-  component: MetalRatesPage,
+  component: () => (
+    <OwnerOnly>
+      <MetalRatesPage />
+    </OwnerOnly>
+  ),
 });
 
 const ROWS: { metal: string; karat: number | null; label: string }[] = [

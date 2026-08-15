@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminShell } from "@/components/admin/AdminLayout";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const Route = createFileRoute("/admin/_shell")({
   beforeLoad: async () => {
@@ -10,8 +11,10 @@ export const Route = createFileRoute("/admin/_shell")({
     return { user: data.user };
   },
   component: () => (
-    <AdminShell>
-      <Outlet />
-    </AdminShell>
+    <AuthProvider>
+      <AdminShell>
+        <Outlet />
+      </AdminShell>
+    </AuthProvider>
   ),
 });
