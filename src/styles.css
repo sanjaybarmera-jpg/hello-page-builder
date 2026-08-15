@@ -42,6 +42,12 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-antique: var(--gold-antique);
+  --color-gold-soft: var(--gold-soft);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-pearl: var(--pearl);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
