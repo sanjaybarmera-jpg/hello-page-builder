@@ -5,7 +5,8 @@ import { SiteHeader, catalogSearch } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
 import { LuxuryProductCard } from "@/components/LuxuryProductCard";
-import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
+import { ShopByCategoryBento } from "@/components/ShopByCategoryBento";
+import { useMetalRates, useProducts } from "@/hooks/useJewelleryData";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,7 +59,6 @@ const TESTIMONIALS = [
 ];
 
 function Index() {
-  const { data: categories } = useCategories();
   const { data: products } = useProducts();
   const { data: rates } = useMetalRates();
   const metalRates = rates ?? [];
@@ -129,31 +129,8 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-10">
           <SupabaseStatus />
 
-          <section className="mt-10">
-            <h2 className="font-serif text-3xl tracking-wide text-primary">Shop by category</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {(categories ?? []).map((c) => (
-                <Link
-                  key={String(c.id)}
-                  to="/catalog"
-                  search={catalogSearch({ category: String(c.id) })}
-                  className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-lg"
-                >
-                  {c.image_url ? (
-                    <img
-                      src={c.image_url}
-                      alt={c.name}
-                      loading="lazy"
-                      className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="h-40 w-full bg-secondary" />
-                  )}
-                  <p className="px-5 py-4 font-serif text-xl tracking-wide text-primary">{c.name}</p>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <ShopByCategoryBento />
+
 
           <section className="mt-16">
             <div className="flex items-end justify-between gap-4">
