@@ -5,6 +5,7 @@ import { SiteHeader, catalogSearch } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
 import { LuxuryProductCard } from "@/components/LuxuryProductCard";
+import { ShopByCategoryBento } from "@/components/ShopByCategoryBento";
 import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
 
 export const Route = createFileRoute("/")({
