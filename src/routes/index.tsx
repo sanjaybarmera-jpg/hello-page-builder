@@ -10,13 +10,13 @@ import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryD
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NAKKASHI — Fine Gold & Diamond Jewellery" },
+      { title: "NAKKASHI — Handcrafted Silver at Wholesale Rates" },
       {
         name: "description",
         content:
-          "NAKKASHI: BIS hallmarked gold, certified diamond and silver jewellery priced live against today's metal rates, with instant digital GST invoices.",
+          "NAKKASHI Fine Silver: Purity, Craft, Honest Pricing — handcrafted silver jewellery at direct wholesale rates, priced live against today's metal rates with instant GST invoices.",
       },
-      { property: "og:title", content: "NAKKASHI — Fine Gold & Diamond Jewellery" },
+      { property: "og:title", content: "NAKKASHI — Handcrafted Silver at Wholesale Rates" },
       {
         property: "og:description",
         content:
