@@ -89,8 +89,8 @@ function Index() {
                 Jewellery made to be <span className="gold-text">remembered</span>
               </h1>
               <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-                Hallmarked gold, certified diamonds and hand-finished silver — crafted in our own
-                workshops since 1954 and priced transparently against today&apos;s rates.
+                Handcrafted Silver at Direct Wholesale Rates — hallmarked purity, honest making
+                charges and transparent pricing against today&apos;s live metal rates.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">
@@ -176,7 +176,7 @@ function Index() {
 
           <section className="mt-16">
             <p className="text-center text-xs uppercase tracking-[0.4em] text-gold-antique">
-              Loved by families since 1954
+              Purity • Craft • Honest Pricing
             </p>
             <h2 className="mt-3 text-center font-serif text-4xl tracking-wide text-primary">
               Stories from our patrons

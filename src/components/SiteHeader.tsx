@@ -46,7 +46,7 @@ export function SiteHeader({ showCategories = true }: { showCategories?: boolean
               NAKKASHI
             </span>
             <span className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-              Since 1954
+              Purity • Craft • Honest Pricing
             </span>
           </Link>
 
