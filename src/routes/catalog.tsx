@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
-import { calculateJewelleryPrice, inr, purityLabel } from "@/lib/jewellery";
+import { calculateJewelleryPrice } from "@/lib/jewellery";
+import { LuxuryProductCard } from "@/components/LuxuryProductCard";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
@@ -202,47 +203,9 @@ function CatalogPage() {
           </p>
 
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {list.map((p) => {
-              const price = calculateJewelleryPrice(p, metalRates);
-              return (
-                <Link
-                  key={p.id}
-                  to="/product/$id"
-                  params={{ id: String(p.id) }}
-                  className="block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
-                >
-                  <div className="aspect-4/3 overflow-hidden bg-secondary">
-                    {p.image_url ? (
-                      <img
-                        src={p.image_url}
-                        alt={p.name}
-                        loading="lazy"
-                        className="size-full object-cover"
-                      />
-                    ) : (
-                      <div className="grid size-full place-items-center font-serif text-4xl text-primary/30">
-                        {p.name?.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-serif text-xl text-primary">{p.name}</h3>
-                    <div className="mt-3 flex flex-wrap gap-2 text-[11px]">
-                      <span className="rounded-full bg-accent px-3 py-1 text-accent-foreground">
-                        {purityLabel(p)}
-                      </span>
-                      <span className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground">
-                        {Number(p.net_weight)}g net
-                      </span>
-                      <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">
-                        SKU {p.sku}
-                      </span>
-                    </div>
-                    <p className="mt-4 text-2xl font-semibold">{inr(price.finalPrice)}</p>
-                  </div>
-                </Link>
-              );
-            })}
+            {list.map((p) => (
+              <LuxuryProductCard key={String(p.id)} product={p} metalRates={metalRates} />
+            ))}
           </div>
 
           {!isLoading && list.length === 0 && (
