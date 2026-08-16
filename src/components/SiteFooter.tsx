@@ -13,8 +13,8 @@ export function SiteFooter() {
           <div>
             <p className="font-serif text-2xl tracking-wide gold-text">NAKKASHI</p>
             <p className="mt-3 text-sm leading-relaxed text-pearl/70">
-              BIS hallmarked gold, certified diamonds and hand-finished silver — crafted in our own
-              workshops since 1954.
+              Purity • Craft • Honest Pricing — handcrafted silver at direct wholesale rates,
+              hallmarked and made in our own workshops.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-gold-soft">
