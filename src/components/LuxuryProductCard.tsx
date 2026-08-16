@@ -26,7 +26,7 @@ export function LuxuryProductCard({
       productId: String(product.id),
       name: product.name,
       sku: product.sku,
-      image_url: product.image_url,
+      image_url: product.image_url ?? null,
       metal: product.metal,
       karat: product.karat,
       net_weight: Number(product.net_weight ?? 0),
