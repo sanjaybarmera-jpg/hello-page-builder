@@ -53,7 +53,7 @@ function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm">
         <div className="text-center">
-          <p className="font-serif text-3xl text-foreground">Ratan Jewellers</p>
+          <p className="font-serif text-3xl text-foreground">NAKKASHI</p>
           <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
             Admin Access
           </p>
@@ -70,7 +70,7 @@ function AdminLogin() {
               maxLength={255}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@ratanjewellers.com"
+              placeholder="admin@nakkashi.in"
             />
           </div>
           <div>

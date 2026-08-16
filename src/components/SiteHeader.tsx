@@ -43,10 +43,10 @@ export function SiteHeader({ showCategories = true }: { showCategories?: boolean
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
           <Link to="/" className="mr-auto">
             <span className="block font-serif text-2xl leading-none tracking-tight text-primary">
-              Ratan Jewellers
+              NAKKASHI
             </span>
             <span className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-              Since 1954
+              Purity • Craft • Honest Pricing
             </span>
           </Link>
 

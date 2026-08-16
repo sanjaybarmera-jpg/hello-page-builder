@@ -174,7 +174,7 @@ function TagsPage() {
             className="jewel-tag rounded-md border border-border bg-white p-2 text-center text-black"
           >
             <p className="font-serif text-[11px] font-semibold tracking-[0.18em]">
-              RATAN JEWELLERS
+              NAKKASHI
             </p>
             <Barcode value={String(p.sku ?? p.id)} height={30} className="mt-1 h-8 w-full" />
             <p className="font-mono text-[9px] tracking-widest">{p.sku}</p>

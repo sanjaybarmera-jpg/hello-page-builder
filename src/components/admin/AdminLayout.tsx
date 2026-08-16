@@ -65,7 +65,7 @@ export function AdminShell({ children }: { children?: ReactNode }) {
     <div className="flex min-h-screen bg-background">
       <aside className="hidden w-64 shrink-0 border-r border-border bg-card/60 px-4 py-6 md:block">
         <Link to="/" className="block px-2">
-          <p className="font-serif text-2xl leading-none text-foreground">Ratan</p>
+          <p className="font-serif text-2xl leading-none text-foreground">NAKKASHI</p>
           <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
             Jewellers
           </p>

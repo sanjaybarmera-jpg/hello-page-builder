@@ -32,13 +32,13 @@ import {
 export const Route = createFileRoute("/product/$id")({
   head: () => ({
     meta: [
-      { title: "Jewellery Detail — Ratan Jewellers" },
+      { title: "Jewellery Detail — NAKKASHI" },
       {
         name: "description",
         content:
-          "Live gold-rate pricing, transparent price breakup, purity and size options on every Ratan Jewellers piece.",
+          "Live gold-rate pricing, transparent price breakup, purity and size options on every NAKKASHI piece.",
       },
-      { property: "og:title", content: "Jewellery Detail — Ratan Jewellers" },
+      { property: "og:title", content: "Jewellery Detail — NAKKASHI" },
       {
         property: "og:description",
         content: "Transparent, live-rate jewellery pricing with full price breakup.",

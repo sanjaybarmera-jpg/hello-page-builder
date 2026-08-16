@@ -29,13 +29,13 @@ export const Route = createFileRoute("/catalog")({
   }),
   head: () => ({
     meta: [
-      { title: "Catalog — Search Gold & Diamond Jewellery | Ratan Jewellers" },
+      { title: "Catalog — Search Gold & Diamond Jewellery | NAKKASHI" },
       {
         name: "description",
         content:
-          "Search and filter the Ratan Jewellers catalog by category, purity, weight and price with live gold-rate pricing.",
+          "Search and filter the NAKKASHI catalog by category, purity, weight and price with live gold-rate pricing.",
       },
-      { property: "og:title", content: "Catalog — Ratan Jewellers" },
+      { property: "og:title", content: "Catalog — NAKKASHI" },
       {
         property: "og:description",
         content: "Filter fine jewellery by category, purity and weight with live pricing.",

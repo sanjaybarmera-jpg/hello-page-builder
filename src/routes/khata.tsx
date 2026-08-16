@@ -10,13 +10,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const Route = createFileRoute("/khata")({
   head: () => ({
     meta: [
-      { title: "Track Order & Download Bill | Ratan Jewellers" },
+      { title: "Track Order & Download Bill | NAKKASHI" },
       {
         name: "description",
         content:
-          "Enter your phone number to view your Ratan Jewellers purchase history and download printable GST invoices.",
+          "Enter your phone number to view your NAKKASHI purchase history and download printable GST invoices.",
       },
-      { property: "og:title", content: "Track Order & Download Bill — Ratan Jewellers" },
+      { property: "og:title", content: "Track Order & Download Bill — NAKKASHI" },
       {
         property: "og:description",
         content: "Look up your orders by phone number and print your GST invoice.",

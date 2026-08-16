@@ -11,10 +11,10 @@ export function SiteFooter() {
       <footer className="mt-20 border-t border-gold/40 bg-emerald-deep text-pearl">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-serif text-2xl tracking-wide gold-text">Ratan Jewellers</p>
+            <p className="font-serif text-2xl tracking-wide gold-text">NAKKASHI</p>
             <p className="mt-3 text-sm leading-relaxed text-pearl/70">
-              BIS hallmarked gold, certified diamonds and hand-finished silver — crafted in our own
-              workshops since 1954.
+              Purity • Craft • Honest Pricing — handcrafted silver at direct wholesale rates,
+              hallmarked and made in our own workshops.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-gold-soft">
@@ -51,10 +51,10 @@ export function SiteFooter() {
               <Phone className="h-4 w-4" /> +91 98200 00000
             </a>
             <a
-              href="mailto:care@ratanjewellers.in"
+              href="mailto:support@nakkashi.in"
               className="mt-2 flex items-center gap-2 hover:text-gold"
             >
-              <Mail className="h-4 w-4" /> care@ratanjewellers.in
+              <Mail className="h-4 w-4" /> support@nakkashi.in
             </a>
             <a
               href={WHATSAPP}
@@ -90,7 +90,7 @@ export function SiteFooter() {
 
         <div className="border-t border-gold/20">
           <p className="mx-auto max-w-6xl px-6 py-6 text-xs text-pearl/60">
-            © {new Date().getFullYear()} Ratan Jewellers. All rights reserved. Prices update with
+            © {new Date().getFullYear()} NAKKASHI. All rights reserved. Prices update with
             live metal rates and include 3% GST.
           </p>
         </div>

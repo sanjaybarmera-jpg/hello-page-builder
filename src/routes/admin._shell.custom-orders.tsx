@@ -75,7 +75,7 @@ function daysUntil(date?: string | null): number | null {
 
 function buildProgressMessage(order: CustomOrder): string {
   return [
-    "✨ *Ratan Jewellers - Bespoke Jewellery Update* ✨",
+    "✨ *NAKKASHI - Bespoke Jewellery Update* ✨",
     `Dear ${order.customer_name ?? "Customer"},`,
     `Your custom order *${order.title ?? "Bespoke piece"}* (Order #${order.order_number}) is now in *${(order.stage ?? "DESIGNING").toUpperCase()}* stage.`,
     `Target Delivery Date: ${

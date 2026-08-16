@@ -27,7 +27,7 @@ export class ErrorBoundary extends Component<Props, State> {
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-10 text-center shadow-sm">
           <p className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
-            Ratan Jewellers
+            NAKKASHI
           </p>
           <h1 className="mt-4 font-serif text-3xl text-foreground">Something went wrong</h1>
           <p className="mt-3 text-sm text-muted-foreground">
@@ -55,8 +55,8 @@ export class ErrorBoundary extends Component<Props, State> {
               +91 98765 43210
             </a>{" "}
             or email{" "}
-            <a href="mailto:support@ratanjewellers.com" className="text-primary">
-              support@ratanjewellers.com
+            <a href="mailto:support@nakkashi.in" className="text-primary">
+              support@nakkashi.in
             </a>
           </p>
         </div>

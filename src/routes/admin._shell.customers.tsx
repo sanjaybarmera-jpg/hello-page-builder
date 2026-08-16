@@ -244,7 +244,7 @@ function CustomersPage() {
       ]),
     ]);
     const date = new Date().toISOString().slice(0, 10);
-    downloadCsv(`ratan_jewellers_customers_${date}.csv`, csv);
+    downloadCsv(`nakkashi_customers_${date}.csv`, csv);
     toast.success("Customers exported");
   };
 
