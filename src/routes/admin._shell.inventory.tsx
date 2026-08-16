@@ -411,7 +411,7 @@ function InventoryPage() {
               variant="outline"
               onClick={() =>
                 downloadCsv(
-                  `ratan_jewellers_inventory_${new Date().toISOString().slice(0, 10)}.csv`,
+                  `nakkashi_inventory_${new Date().toISOString().slice(0, 10)}.csv`,
                   buildInventoryCsv(products.data ?? [], categories.data ?? []),
                 )
               }

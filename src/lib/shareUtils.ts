@@ -41,7 +41,7 @@ export function buildInvoiceMessage(
   const status =
     order.order_status ?? order.status ?? (order.payment_mode === "online" ? "PAID" : "PENDING");
   return [
-    "✨ *Ratan Jewellers - Order & Tax Invoice* ✨",
+    "✨ *NAKKASHI - Order & Tax Invoice* ✨",
     `Dear ${order.customer_name ?? "Customer"},`,
     "Thank you for shopping with us! Here are your order details:",
     "",
@@ -52,7 +52,7 @@ export function buildInvoiceMessage(
     "",
     `🔗 *View & Download Tax Invoice:* ${invoiceUrl}`,
     "",
-    "📍 *Ratan Jewellers*",
+    "📍 *NAKKASHI*",
     "For queries, contact us directly.",
   ].join("\n");
 }

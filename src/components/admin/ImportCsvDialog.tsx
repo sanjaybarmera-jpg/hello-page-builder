@@ -84,7 +84,7 @@ export function ImportCsvDialog({ categories }: { categories: Category[] }) {
 
         <button
           type="button"
-          onClick={() => downloadCsv("ratan_jewellers_sample_template.csv", SAMPLE_CSV)}
+          onClick={() => downloadCsv("nakkashi_sample_template.csv", SAMPLE_CSV)}
           className="inline-flex items-center gap-2 self-start text-sm text-primary underline-offset-4 hover:underline"
         >
           <Download className="h-4 w-4" />

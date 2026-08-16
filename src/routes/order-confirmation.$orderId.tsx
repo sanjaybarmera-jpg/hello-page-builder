@@ -18,16 +18,16 @@ import {
 export const Route = createFileRoute("/order-confirmation/$orderId")({
   head: () => ({
     meta: [
-      { title: "Order Confirmation & GST Invoice — Ratan Jewellers" },
+      { title: "Order Confirmation & GST Invoice — NAKKASHI" },
       {
         name: "description",
         content:
-          "Your Ratan Jewellers order confirmation with a printable GST tax invoice showing metal value, making charges, CGST and SGST.",
+          "Your NAKKASHI order confirmation with a printable GST tax invoice showing metal value, making charges, CGST and SGST.",
       },
-      { property: "og:title", content: "Order Confirmation — Ratan Jewellers" },
+      { property: "og:title", content: "Order Confirmation — NAKKASHI" },
       {
         property: "og:description",
-        content: "Printable GST tax invoice for your Ratan Jewellers order.",
+        content: "Printable GST tax invoice for your NAKKASHI order.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -171,7 +171,7 @@ function OrderConfirmation() {
         <article className="mt-8 rounded-2xl border border-border bg-card p-8 print:border-0 print:p-0 print:shadow-none">
           <header className="flex flex-wrap justify-between gap-6 border-b border-border pb-6">
             <div>
-              <p className="font-serif text-2xl text-primary">Ratan Jewellers</p>
+              <p className="font-serif text-2xl text-primary">NAKKASHI</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 12 Zaveri Bazaar Road, Mumbai 400002
                 <br />

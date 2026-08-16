@@ -16,13 +16,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — Ratan Jewellers" },
+      { title: "Checkout — NAKKASHI" },
       {
         name: "description",
         content:
-          "Securely complete your Ratan Jewellers order with transparent gold pricing, making charges and GST.",
+          "Securely complete your NAKKASHI order with transparent gold pricing, making charges and GST.",
       },
-      { property: "og:title", content: "Checkout — Ratan Jewellers" },
+      { property: "og:title", content: "Checkout — NAKKASHI" },
       {
         property: "og:description",
         content: "Complete your jewellery order with transparent, live gold-rate pricing.",
