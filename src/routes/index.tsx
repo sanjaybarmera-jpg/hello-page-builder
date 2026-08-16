@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
 import { LuxuryProductCard } from "@/components/LuxuryProductCard";
 import { ShopByCategoryBento } from "@/components/ShopByCategoryBento";
-import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
+import { useMetalRates, useProducts } from "@/hooks/useJewelleryData";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,7 +59,6 @@ const TESTIMONIALS = [
 ];
 
 function Index() {
-  const { data: categories } = useCategories();
   const { data: products } = useProducts();
   const { data: rates } = useMetalRates();
   const metalRates = rates ?? [];
