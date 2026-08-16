@@ -27,7 +27,7 @@ export const Route = createFileRoute("/admin/_shell/customers")({
 
 type CustomerRow = {
   id: string | number;
-  name?: string | null;
+  full_name?: string | null;
   phone?: string | null;
   email?: string | null;
   address?: string | null;
@@ -157,7 +157,7 @@ function CustomersPage() {
       const key = normPhone(c.phone) || `id:${String(c.id)}`;
       const row = ensure(key);
       row.customerId = c.id;
-      row.name = c.name ?? row.name;
+      row.name = c.full_name ?? row.name;
       row.phone = c.phone ?? row.phone;
       row.email = c.email ?? "";
       row.address = c.address ?? "";
@@ -206,7 +206,7 @@ function CustomersPage() {
         const { error } = await supabase
           .from("customers")
           .update({
-            name: payload.name,
+            full_name: payload.name,
             phone: payload.phone,
             email: payload.email || null,
             address: payload.address || null,
@@ -216,7 +216,7 @@ function CustomersPage() {
         return;
       }
       const { error } = await supabase.from("customers").insert({
-        name: payload.name,
+        full_name: payload.name,
         phone: payload.phone,
         email: payload.email || null,
         address: payload.address || null,
