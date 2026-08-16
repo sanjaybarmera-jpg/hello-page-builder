@@ -39,7 +39,7 @@ export function SiteHeader({ showCategories = true }: { showCategories?: boolean
     <div className="sticky top-0 z-30 bg-background/95 backdrop-blur">
       <RatesTicker />
 
-      <header className="border-b border-border">
+      <header className="border-b border-gold/40 shadow-[0_1px_0_0_color-mix(in_oklab,var(--gold)_25%,transparent)]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-6 py-4">
           <Link to="/" className="mr-auto">
             <span className="block font-serif text-2xl leading-none tracking-tight text-primary">
@@ -97,14 +97,14 @@ export function SiteHeader({ showCategories = true }: { showCategories?: boolean
         </div>
 
         {showCategories && (categories?.length ?? 0) > 0 && (
-          <div className="border-t border-border/70">
+          <div className="border-t border-gold/25 bg-secondary/30">
             <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-2.5">
               {(categories ?? []).map((c) => (
                 <Link
                   key={String(c.id)}
                   to="/catalog"
                   search={catalogSearch({ category: String(c.id) })}
-                  className="shrink-0 rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                  className="shrink-0 rounded-full border border-gold/40 bg-background/60 px-4 py-1.5 text-xs uppercase tracking-[0.15em] text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-gold hover:text-primary"
                 >
                   {c.name}
                 </Link>
