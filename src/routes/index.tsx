@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BadgeCheck, FileText, Gem, ShieldCheck } from "lucide-react";
+import { BadgeCheck, RefreshCw, ShieldCheck, Star, Truck } from "lucide-react";
 
 import { SiteHeader, catalogSearch } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SupabaseStatus } from "@/components/SupabaseStatus";
+import { LuxuryProductCard } from "@/components/LuxuryProductCard";
 import { useCategories, useMetalRates, useProducts } from "@/hooks/useJewelleryData";
-import { calculateJewelleryPrice, inr, purityLabel } from "@/lib/jewellery";
 
 export const Route = createFileRoute("/")({
   head: () => ({
